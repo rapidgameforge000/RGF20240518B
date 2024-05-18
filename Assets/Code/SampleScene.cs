@@ -6,6 +6,8 @@ namespace Assets.Code
         {
             UnityEngine.QualitySettings.vSyncCount = 0;
             UnityEngine.Application.targetFrameRate = 30;
+
+            
         }
 
         private void Update()
