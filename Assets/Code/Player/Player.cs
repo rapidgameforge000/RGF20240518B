@@ -1,13 +1,11 @@
-using UnityEngine;
-using static UnityEditor.PlayerSettings;
-
 internal class Player : UnityEngine.MonoBehaviour
 {
     private const int FIRST_POS_X = 50;
     private const int FIRST_POS_Y = 0;
-    private const int UNDER_LINE = -500;
+    private const int UNDER_LINE = -550;
     private const int DEAD_LINE = -950;
     private const int SIDE_LIMIT = 950;
+    private const int UNDER_SIZE = 50;
     private const float GRAVITY = 0.65f;
     private const float JUMP_FORCE = 25.0f;
     private const float SPEED_FORCE = 0.5f;
@@ -23,14 +21,14 @@ internal class Player : UnityEngine.MonoBehaviour
         UnityEngine.GameObject instance = UnityEngine.GameObject.Instantiate(prefab);
         _object = instance;
 
-        _object.transform.localPosition = new Vector2(FIRST_POS_X, FIRST_POS_Y);
+        _object.transform.localPosition = new UnityEngine.Vector2(FIRST_POS_X, FIRST_POS_Y);
     }
 
     internal void Update()
     {
         _last_pos = _object.transform.localPosition;
         UnityEngine.Vector2 pos = _object.transform.localPosition;
-        if( pos.y <= UNDER_LINE )
+        if( pos.y - UNDER_SIZE <= UNDER_LINE )
         {
             jump();
         }
@@ -52,17 +50,18 @@ internal class Player : UnityEngine.MonoBehaviour
 
     internal UnityEngine.Vector2 getPos()
     {
-        return _object.transform.localPosition;
+        UnityEngine.Vector2 pos = _object.transform.localPosition;
+        return new UnityEngine.Vector2(pos.x, pos.y - UNDER_SIZE);
     }
 
     internal UnityEngine.Vector2 getLastPos()
     {
-        return _last_pos;
+        return new UnityEngine.Vector2(_last_pos.x, _last_pos.y - UNDER_SIZE);
     }
 
     internal void set(UnityEngine.Vector2 pos, bool jumping)
     {
-        _object.transform.localPosition = pos;
+        _object.transform.localPosition = new UnityEngine.Vector2(pos.x, pos.y + UNDER_SIZE);
         if (jumping)
         {
             jump();
