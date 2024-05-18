@@ -41,7 +41,8 @@ public class Block : MonoBehaviour
         // sample
         for (int i = 0;i < TOWER_NUM; i++)
         {
-            setCellNum(i, Random.Range(1, CELL_NUM));
+            //setCellNum(i, Random.Range(1, CELL_NUM));
+            setCellNum(i,5);
 
         }
     }
@@ -128,16 +129,22 @@ public class Block : MonoBehaviour
         result.jumping = false;
         result.pos = playerPos;
 
-        //var x = playerPos.x - BASE_WIDTH + _scroll;
-        //var index = (int)x / WIDTH_PITCH;
+        var x = playerPos.x - BASE_WIDTH + _scroll + WIDTH_PITCH / 2;
+        var index = (int)x / WIDTH_PITCH;
 
-        //    var topCellIndex = _map[index].num - 1;
-        //    var blockPos = _map[index].cell[topCellIndex].GetComponent<Transform>().transform.position;
-            
-        //    if (blockPos.x - CELL_SIZE_WIDTH / 2 < playerPos  && blockPos.y < playerPos.y)
-        //    {
-        //        result.jumping = true;
-        //    }
+        var cellHeight = _map[index].num * HEIGHT_PITCH + BASE_HEIGHT;
+
+        if (cellHeight > playerPos.y)
+        {
+            Debug.LogWarning("ÇﬂÇËçûÇ›");
+            result.pos = playerLastPos;
+            result.pos.x -= _scroll;
+            if(cellHeight < playerLastPos.y)
+            {
+                result.jumping = true;
+
+            }
+        }
 
         return result;
     }
