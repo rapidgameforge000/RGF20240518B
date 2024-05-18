@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    private const int CELL_NUM = 10;
+    private const int CELL_NUM = 20;
     private const int TOWER_NUM = 20;
-    private const int HEIGHT_PITCH = 50;
+    private const int HEIGHT_PITCH = 20;
     private const int WIDTH_PITCH = 120;
     private const int BASE_HEIGHT = -500;
     private const int BASE_WIDTH = -1100;
     private const int SCROLL_SPEED = 5;
-    private const int CELL_SIZE_WIDTH = 300;
 
 
     private struct TOWER
@@ -41,8 +40,7 @@ public class Block : MonoBehaviour
         // sample
         for (int i = 0;i < TOWER_NUM; i++)
         {
-            //setCellNum(i, Random.Range(1, CELL_NUM));
-            setCellNum(i,5);
+            setCellNum(i, Random.Range(1, CELL_NUM));
 
         }
     }
@@ -77,12 +75,12 @@ public class Block : MonoBehaviour
     private GameObject[] createCell()
     {
         var cell = new GameObject[HEIGHT_PITCH];
-        for (int j = 0; j < CELL_NUM; j++)
+        for (int i = 0; i < CELL_NUM; i++)
         {
-            var color = new Color((float)(1.0 * j / CELL_NUM), 1.0f, 0.2f, 1.0f);
-            cell[j] = createPrefab();
-            cell[j].GetComponent<Transform>().position = new Vector2(0, BASE_HEIGHT + j * HEIGHT_PITCH);
-            cell[j].GetComponent<SpriteRenderer>().color = color;
+            var color = new Color( 0.5f - (float)(0.2 * i / CELL_NUM), 0.5f + (float)(0.5f * i / CELL_NUM), 0.2f, 1.0f);
+            cell[i] = createPrefab();
+            cell[i].GetComponent<Transform>().position = new Vector3(0, BASE_HEIGHT + i * HEIGHT_PITCH, i / CELL_NUM);
+            cell[i].GetComponent<SpriteRenderer>().color = color;
         }
         return cell;
     }
@@ -100,7 +98,7 @@ public class Block : MonoBehaviour
     {
         for (int i = 0; i < CELL_NUM; i++)
         {
-            _map[towerIndex].cell[i].GetComponent<Transform>().position = new Vector2(BASE_WIDTH + towerIndex * WIDTH_PITCH - _scroll, BASE_HEIGHT + i * HEIGHT_PITCH);
+            _map[towerIndex].cell[i].GetComponent<Transform>().position = new Vector3(BASE_WIDTH + towerIndex * WIDTH_PITCH - _scroll, BASE_HEIGHT + i * HEIGHT_PITCH, i / CELL_NUM);
         }
     }
 
