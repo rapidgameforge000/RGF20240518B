@@ -7,8 +7,8 @@ internal class Player : UnityEngine.MonoBehaviour
     private const int SIDE_LIMIT = 950;
     private const int UNDER_SIZE = 50;
     private const float GRAVITY = 0.65f;
-    private const float JUMP_FORCE = 25.0f;
-    private const float SPEED_FORCE = 0.5f;
+    private const float JUMP_FORCE = 20.0f;
+    private const float SPEED_FORCE = 0.3f;
     private const float SPEED_MAX = 10.0f;
     
     private UnityEngine.GameObject _object;

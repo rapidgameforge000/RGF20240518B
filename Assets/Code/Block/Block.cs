@@ -40,7 +40,7 @@ public class Block : MonoBehaviour
         // sample
         for (int i = 0;i < TOWER_NUM; i++)
         {
-            setCellNum(i, 5);
+            setCellNum(i, 10);
 
         }
     }
