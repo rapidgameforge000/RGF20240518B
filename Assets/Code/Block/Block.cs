@@ -6,7 +6,7 @@ public class Block : MonoBehaviour
 {
     private const int CELL_NUM = 20;
     private const int TOWER_NUM = 20;
-    private const int HEIGHT_PITCH = 20;
+    private const int HEIGHT_PITCH = 30;
     private const int WIDTH_PITCH = 120;
     private const int BASE_HEIGHT = -500;
     private const int BASE_WIDTH = -1100;
@@ -40,7 +40,7 @@ public class Block : MonoBehaviour
         // sample
         for (int i = 0;i < TOWER_NUM; i++)
         {
-            setCellNum(i, Random.Range(1, CELL_NUM));
+            setCellNum(i, 5);
 
         }
     }
@@ -98,7 +98,7 @@ public class Block : MonoBehaviour
     {
         for (int i = 0; i < CELL_NUM; i++)
         {
-            _map[towerIndex].cell[i].GetComponent<Transform>().position = new Vector3(BASE_WIDTH + towerIndex * WIDTH_PITCH - _scroll, BASE_HEIGHT + i * HEIGHT_PITCH, i / CELL_NUM);
+            _map[towerIndex].cell[i].GetComponent<Transform>().position = new Vector3(BASE_WIDTH + towerIndex * WIDTH_PITCH - _scroll, BASE_HEIGHT + i * HEIGHT_PITCH, (float)i / CELL_NUM);
         }
     }
 
@@ -138,6 +138,7 @@ public class Block : MonoBehaviour
             {
                 playerLastPos.x -= SCROLL_SPEED * 2;
                 result.pos = playerLastPos;
+
             }
             else
             {
