@@ -19,10 +19,19 @@ public class Block : MonoBehaviour
         public int num;
     }
 
+    public struct RESULT
+    {
+        public Vector2 pos;
+        public bool jumping;
+    }
+
     private TOWER[] _map;
     private int _scroll;
 
 
+    Vector2 _playerPos;
+    Vector2 _playerLastPos;
+    
     void Start()
     {
         Random.InitState(10);
@@ -101,13 +110,10 @@ public class Block : MonoBehaviour
         _scroll += SCROLL_SPEED;
         if (_scroll >= WIDTH_PITCH ){
             _scroll -= WIDTH_PITCH;
-            // slide
             for (int i = 0; i < TOWER_NUM - 1; i++)
             {
                 setCellNum(i, _map[i + 1].num);
             }
-
-            // new
             setCellNum(TOWER_NUM - 1, Random.Range(1, CELL_NUM));
         }
 
@@ -116,5 +122,15 @@ public class Block : MonoBehaviour
             setTowerPosX(i);
         }
         
+    }
+
+    private RESULT getResult(Vector2 pos, Vector2 lastPos)
+    {
+        var result = new RESULT();
+        result.jumping = false;
+        result.pos = pos;
+
+
+        return result;
     }
 }
