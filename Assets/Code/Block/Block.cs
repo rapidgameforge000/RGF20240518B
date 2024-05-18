@@ -4,16 +4,36 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    private const int HEIGHT = 10;
+    private const int HEIGHT_PICH = 100;
+
+
     void Start()
     {
-        var prefab = Resources.Load<GameObject>("Block");
-        var obj = GameObject.Instantiate(prefab);    
+        create();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    GameObject createPrefab()
+    {
+        var prefab = Resources.Load<GameObject>("Block");
+        var obj = GameObject.Instantiate(prefab);
+        return obj;
+    }
+    private void create()
+    {
+        var height = new GameObject[HEIGHT];
+        for (int i = 0; i < HEIGHT; i++)
+        {
+            height[i] = createPrefab();
+            height[i].GetComponent<Transform>().position =new Vector3(0,i * HEIGHT_PICH, 0);
+        }
+
     }
 }
