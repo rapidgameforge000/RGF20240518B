@@ -22,5 +22,10 @@ public class Controller : MonoBehaviour
             _player.enabled = false;
             _block.enabled = false;
         }
+
+        Vector2 pos = _player.getPos();
+        Vector2 last_pos = _player.getLastPos();
+        Block.RESULT result = _block.getResult(pos, last_pos);
+        _player.set(result.pos, result.jumping);
     }
 }

@@ -11,10 +11,11 @@ internal class Player : UnityEngine.MonoBehaviour
     private const float GRAVITY = 0.65f;
     private const float JUMP_FORCE = 25.0f;
     private const float SPEED_FORCE = 0.5f;
-    private const float SPEED_MAX = 5.0f;
+    private const float SPEED_MAX = 10.0f;
     
     private UnityEngine.GameObject _object;
     private UnityEngine.Vector2 _vel;
+    private UnityEngine.Vector2 _last_pos;
 
     internal void Start()
     {
@@ -27,23 +28,41 @@ internal class Player : UnityEngine.MonoBehaviour
 
     internal void Update()
     {
+        _last_pos = _object.transform.localPosition;
         UnityEngine.Vector2 pos = _object.transform.localPosition;
         if( pos.y <= UNDER_LINE )
         {
-            _vel.y = JUMP_FORCE; 
+            jump();
         }
 
         moveSide();
-
-        UnityEngine.Vector2 grabity = new UnityEngine.Vector2(0.0f, GRAVITY);
-        _vel -= grabity;
+        _vel.y -= GRAVITY;
         pos += _vel;
-        _object.transform.localPosition = pos; 
+        _object.transform.localPosition = pos;
     }
 
     internal bool isAlive( )
     {
         return _object.transform.localPosition.x >= DEAD_LINE;
+    }
+
+    internal UnityEngine.Vector2 getPos()
+    {
+        return _object.transform.localPosition;
+    }
+
+    internal UnityEngine.Vector2 getLastPos()
+    {
+        return _last_pos;
+    }
+
+    internal void set(UnityEngine.Vector2 pos, bool jumping)
+    {
+        _object.transform.localPosition = pos;
+        if (jumping)
+        {
+            jump();
+        }
     }
 
     private void moveSide()
@@ -75,6 +94,10 @@ internal class Player : UnityEngine.MonoBehaviour
             pos.x = SIDE_LIMIT;
             _object.transform.localPosition = pos;
         }
+    }
 
+    private void jump()
+    {
+        _vel.y = JUMP_FORCE;
     }
 }
