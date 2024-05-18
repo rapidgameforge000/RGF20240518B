@@ -6,12 +6,14 @@ public class Controller : MonoBehaviour
 {
     Player _player;
     Block _block;
+    CountText _count_text;
 
     // Start is called before the first frame update
     void Start()
     {
         _player= GetComponent<Player>();
         _block= GetComponent<Block>();
+        _count_text= GetComponent<CountText>();
     }
 
     // Update is called once per frame
@@ -21,6 +23,7 @@ public class Controller : MonoBehaviour
         {
             _player.enabled = false;
             _block.enabled = false;
+            _count_text.enabled = false;
         }
 
         Vector2 pos = _player.getPos();
