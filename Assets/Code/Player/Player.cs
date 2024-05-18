@@ -4,8 +4,8 @@ using static UnityEditor.PlayerSettings;
 internal class Player : UnityEngine.MonoBehaviour
 {
     private const int UNDER_LINE = 0;
-    private const int DEAD_LINE = -600;
-    private const int SIDE_LIMIT = 600;
+    private const int DEAD_LINE = -950;
+    private const int SIDE_LIMIT = 950;
     [SerializeField] float _gravity = 0.65f;
     [SerializeField] float _jump_force = 20.0f;
     [SerializeField] float _move_speed = 5.0f;
