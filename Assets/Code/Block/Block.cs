@@ -11,6 +11,7 @@ public class Block : MonoBehaviour
     private const int BASE_HEIGHT = -500;
     private const int BASE_WIDTH = -1100;
     private const int SCROLL_SPEED = 5;
+    private const int CELL_SIZE_WIDTH = 300;
 
 
     private struct TOWER
@@ -121,15 +122,22 @@ public class Block : MonoBehaviour
         
     }
 
-    private RESULT getResult(Vector2 pos, Vector2 lastPos)
+    public RESULT getResult(Vector2 playerPos, Vector2 playerLastPos)
     {
         var result = new RESULT();
         result.jumping = false;
-        result.pos = pos;
-        for (int i = 0; i < TOWER_NUM; i++)
-        {
-            ?
-        }
+        result.pos = playerPos;
+
+        //var x = playerPos.x - BASE_WIDTH + _scroll;
+        //var index = (int)x / WIDTH_PITCH;
+
+        //    var topCellIndex = _map[index].num - 1;
+        //    var blockPos = _map[index].cell[topCellIndex].GetComponent<Transform>().transform.position;
+            
+        //    if (blockPos.x - CELL_SIZE_WIDTH / 2 < playerPos  && blockPos.y < playerPos.y)
+        //    {
+        //        result.jumping = true;
+        //    }
 
         return result;
     }
