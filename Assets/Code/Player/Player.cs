@@ -1,8 +1,10 @@
+using UnityEngine;
+
 internal class Player : UnityEngine.MonoBehaviour
 {
     private const int UNDER_LINE = 0;
-    private const float GRAVITY = 0.1f;
-    private const float JAMP_FORCE = 3.0f;
+    [SerializeField] float GRAVITY = 0.1f;
+    [SerializeField] float JAMP_FORCE = 3.0f;
 
     UnityEngine.GameObject _object;
     UnityEngine.Vector2 _pos;
@@ -13,6 +15,9 @@ internal class Player : UnityEngine.MonoBehaviour
         UnityEngine.GameObject prefab = UnityEngine.Resources.Load<UnityEngine.GameObject>("Player/player");
         UnityEngine.GameObject instance = UnityEngine.GameObject.Instantiate(prefab);
         _object = instance;
+
+        _pos = new UnityEngine.Vector2(-5, 0);
+        _object.transform.position = _pos;
     }
 
     internal void Update()
