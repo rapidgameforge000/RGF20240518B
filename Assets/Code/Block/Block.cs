@@ -136,12 +136,16 @@ public class Block : MonoBehaviour
 
         if (cellHeight > playerPos.y)
         {
-            result.pos = playerLastPos;
-            result.pos.x -= SCROLL_SPEED * 2;
-            if (cellHeight < playerLastPos.y)
+            if (cellHeight > playerLastPos.y)
+            {
+                playerLastPos.x -= SCROLL_SPEED * 2;
+                result.pos = playerLastPos;
+            }
+            else
             {
                 result.jumping = true;
-
+                playerPos.y = cellHeight;
+                result.pos = playerPos;
             }
         }
 
