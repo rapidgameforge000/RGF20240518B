@@ -4,8 +4,8 @@ internal class Player : UnityEngine.MonoBehaviour
 {
     private const int UNDER_LINE = 0;
     private const int DEAD_LINE = -300;
-    [SerializeField] float _gravity = 0.1f;
-    [SerializeField] float _jump_force = 3.0f;
+    [SerializeField] float _gravity = 0.65f;
+    [SerializeField] float _jump_force = 20.0f;
 
     UnityEngine.GameObject _object;
     UnityEngine.Vector2 _vel;
