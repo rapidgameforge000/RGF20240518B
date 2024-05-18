@@ -29,9 +29,6 @@ public class Block : MonoBehaviour
     private int _scroll;
 
 
-    Vector2 _playerPos;
-    Vector2 _playerLastPos;
-    
     void Start()
     {
         Random.InitState(10);
@@ -129,7 +126,10 @@ public class Block : MonoBehaviour
         var result = new RESULT();
         result.jumping = false;
         result.pos = pos;
-
+        for (int i = 0; i < TOWER_NUM; i++)
+        {
+            ?
+        }
 
         return result;
     }
