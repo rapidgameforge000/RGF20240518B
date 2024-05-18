@@ -136,10 +136,9 @@ public class Block : MonoBehaviour
 
         if (cellHeight > playerPos.y)
         {
-            Debug.LogWarning("ÇﬂÇËçûÇ›");
             result.pos = playerLastPos;
-            result.pos.x -= _scroll;
-            if(cellHeight < playerLastPos.y)
+            result.pos.x -= SCROLL_SPEED * 2;
+            if (cellHeight < playerLastPos.y)
             {
                 result.jumping = true;
 
