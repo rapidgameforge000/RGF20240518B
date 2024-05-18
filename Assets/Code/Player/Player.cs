@@ -38,6 +38,10 @@ internal class Player : UnityEngine.MonoBehaviour
         moveSide();
         _vel.y -= GRAVITY;
         pos += _vel;
+        if (pos.x >= SIDE_LIMIT)
+        {
+            pos.x = SIDE_LIMIT;
+        }
         _object.transform.localPosition = pos;
     }
 
@@ -86,13 +90,6 @@ internal class Player : UnityEngine.MonoBehaviour
         if (!UnityEngine.Input.anyKey)
         {
             _vel.x *= 0.9f;
-        }
-
-        if (_object.transform.localPosition.x >= SIDE_LIMIT)
-        {
-            Vector2 pos = _object.transform.localPosition;
-            pos.x = SIDE_LIMIT;
-            _object.transform.localPosition = pos;
         }
     }
 
