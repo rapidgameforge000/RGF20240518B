@@ -21,7 +21,7 @@ internal class Player : UnityEngine.MonoBehaviour
         UnityEngine.GameObject instance = UnityEngine.GameObject.Instantiate(prefab);
         _object = instance;
 
-        _object.transform.localPosition = new UnityEngine.Vector2(FIRST_POS_X, FIRST_POS_Y);
+        _object.transform.localPosition = new UnityEngine.Vector3(FIRST_POS_X, FIRST_POS_Y, 1.0f);
     }
 
     internal void Update()
