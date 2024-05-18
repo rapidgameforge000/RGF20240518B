@@ -1,9 +1,11 @@
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 internal class Player : UnityEngine.MonoBehaviour
 {
     private const int UNDER_LINE = 0;
     private const int DEAD_LINE = -300;
+    private const int SIDE_LIMIT = 300;
     [SerializeField] float _gravity = 0.65f;
     [SerializeField] float _jump_force = 20.0f;
     [SerializeField] float _move_speed = 5.0f;
@@ -29,11 +31,11 @@ internal class Player : UnityEngine.MonoBehaviour
             _vel = vec; 
         }
 
-        if(UnityEngine.Input.GetKey(UnityEngine.KeyCode.RightArrow))
+        if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.RightArrow) && pos.x <= SIDE_LIMIT)
         {
             pos.x += _move_speed;
         }
-        if(UnityEngine.Input.GetKey(UnityEngine.KeyCode.LeftArrow))
+        if (UnityEngine.Input.GetKey(UnityEngine.KeyCode.LeftArrow))
         {
             pos.x -= _move_speed;
         }
