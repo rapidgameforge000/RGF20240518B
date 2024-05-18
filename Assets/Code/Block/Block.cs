@@ -6,10 +6,11 @@ public class Block : MonoBehaviour
 {
     private const int CELL_NUM = 10;
     private const int TOWER_NUM = 20;
-    private const int HEIGHT_PICH = 50;
-    private const int WIDTH_PICH = 120;
+    private const int HEIGHT_PITCH = 50;
+    private const int WIDTH_PITCH = 120;
     private const int BASE_HEIGHT = -500;
-    private const int BASE_WIDTH = -840;
+    private const int BASE_WIDTH = -1100;
+    private const int SCROLL_SPEED = 5;
 
 
     private struct TOWER
@@ -24,19 +25,23 @@ public class Block : MonoBehaviour
 
     void Start()
     {
+        Random.InitState(10);
+
         createMap();
-        adjustByScroll();
         _scroll = 0;
+        adjustByScroll();
+
+        // sample
+        for (int i = 0;i < TOWER_NUM; i++)
+        {
+            setCellNum(i, Random.Range(1, CELL_NUM));
+
+        }
     }
 
     void Update()
     {
-        _scroll++;
-        _scroll %= WIDTH_PICH * TOWER_NUM;
-        for (int i = 0; i < TOWER_NUM; i++)
-        {
-            setTowerPosX(i);
-        }
+        adjustByScroll();
     }
 
     GameObject createPrefab()
@@ -63,12 +68,12 @@ public class Block : MonoBehaviour
 
     private GameObject[] createCell()
     {
-        var cell = new GameObject[HEIGHT_PICH];
+        var cell = new GameObject[HEIGHT_PITCH];
         for (int j = 0; j < CELL_NUM; j++)
         {
-            var color = new Color(100 * j / CELL_NUM, 150, 200);
+            var color = new Color((float)(1.0 * j / CELL_NUM), 1.0f, 0.2f, 1.0f);
             cell[j] = createPrefab();
-            cell[j].GetComponent<Transform>().position = new Vector2(0, BASE_HEIGHT + j * HEIGHT_PICH);
+            cell[j].GetComponent<Transform>().position = new Vector2(0, BASE_HEIGHT + j * HEIGHT_PITCH);
             cell[j].GetComponent<SpriteRenderer>().color = color;
         }
         return cell;
@@ -80,22 +85,36 @@ public class Block : MonoBehaviour
         {
             _map[towerIndex].cell[i].SetActive(i < num);
         }
+        _map[towerIndex].num = num;
     }
 
     private void setTowerPosX(int towerIndex)
     {
         for (int i = 0; i < CELL_NUM; i++)
         {
-            _map[towerIndex].cell[i].GetComponent<Transform>().position = new Vector2(BASE_WIDTH + towerIndex * WIDTH_PICH - _scroll, BASE_HEIGHT + i * HEIGHT_PICH);
+            _map[towerIndex].cell[i].GetComponent<Transform>().position = new Vector2(BASE_WIDTH + towerIndex * WIDTH_PITCH - _scroll, BASE_HEIGHT + i * HEIGHT_PITCH);
         }
     }
 
     private void adjustByScroll()
     {
+        _scroll += SCROLL_SPEED;
+        if (_scroll >= WIDTH_PITCH ){
+            _scroll -= WIDTH_PITCH;
+            // slide
+            for (int i = 0; i < TOWER_NUM - 1; i++)
+            {
+                setCellNum(i, _map[i + 1].num);
+            }
+
+            // new
+            setCellNum(TOWER_NUM - 1, Random.Range(1, CELL_NUM));
+        }
+
         for (int i = 0; i < TOWER_NUM; i++)
         {
-            setCellNum(i, 10);
             setTowerPosX(i);
         }
+        
     }
 }
